@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ffafcc;
+            --purple: #cdb4db;
+            --sky: #a2d2ff;
+            --cream: #fefae0;
+            --text: #5e548e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--pink) 50%, var(--purple) 100%);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* --- Loading/Countdown --- */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--cream);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.8s ease-out;
+        }
+        #countdown-text {
+            font-family: 'Fredoka One', cursive;
+            font-size: 8rem;
+            color: var(--pink);
+            animation: bounceIn 1s infinite;
+        }
+
+        /* --- Cute Floating Cat --- */
+        #cat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 120px;
+            height: 120px;
+            z-index: 999;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #cat-container:active { transform: scale(1.2) translateY(-20px); }
+        .heart-pop {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 24px;
+            animation: floatUp 1s forwards;
+        }
+
+        /* --- Sections --- */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 { font-family: 'Fredoka One', cursive; font-size: 4rem; color: #fff; text-shadow: 3px 3px var(--purple); margin-bottom: 20px; }
+
+        /* --- Cake Section --- */
+        .cake-box { position: relative; cursor: pointer; }
+        .candle {
+            width: 10px; height: 30px; background: #ffd166;
+            position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+            border-radius: 5px;
+        }
+        .flame {
+            width: 12px; height: 18px; background: #ff9f1c;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute; top: -15px; left: -1px;
+            animation: flicker 0.1s infinite alternate;
+        }
+        .cake-slice { transition: transform 0.5s ease; }
+        .cut-animation { transform: translateX(40px) rotate(10deg); }
+
+        /* --- Card Section --- */
+        .card {
+            width: 300px; height: 400px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 30px;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+            cursor: pointer;
+        }
+        .card:hover { transform: rotateY(10deg) rotateX(5deg); }
+
+        /* --- Animations --- */
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes flicker {
+            from { opacity: 0.8; transform: scale(1); }
+            to { opacity: 1; transform: scale(1.1); }
+        }
+        @keyframes floatUp {
+            to { transform: translateY(-100px); opacity: 0; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            background: white;
+            color: var(--text);
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+        .btn:hover { transform: scale(1.05); background: var(--sky); color: white; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div id="countdown-text">3</div>
+    </div>
+
+    <div id="cat-container" onclick="meow()">
+        <svg viewBox="0 0 200 200" width="100%" height="100%">
+            <circle cx="100" cy="120" r="60" fill="#fff" /> <circle cx="100" cy="70" r="45" fill="#fff" /> <polygon points="65,40 85,60 55,70" fill="#fff" /> <polygon points="135,40 115,60 145,70" fill="#fff" /> <circle cx="85" cy="70" r="5" fill="#333" /> <circle cx="115" cy="70" r="5" fill="#333" /> <path d="M 90 85 Q 100 95 110 85" fill="none" stroke="#ffafcc" stroke-width="3" /> <path d="M 160 120 Q 180 100 160 80" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" /> </svg>
+    </div>
+
+    <section id="welcome">
+        <h1 class="reveal">🎉 Happy Birthday! Rehana 🎉</h1>
+        <p class="reveal">Wishing you a day filled with magic and joy!</p>
+        <div class="btn" onclick="scrollToSection('cake-section')">Let's Party! 👇</div>
+    </section>
+
+    <section id="cake-section">
+        <h2>Make a Wish!</h2>
+        <div class="cake-box" id="cake" onclick="cutCake()">
+            <svg width="200" height="200" viewBox="0 0 200 200">
+                <rect id="cake-base" x="40" y="100" width="120" height="80" rx="10" fill="#cdb4db" />
+                <rect x="40" y="100" width="120" height="20" fill="#ffafcc" />
+                <div class="candle" id="candle">
+                    <div class="flame" id="flame"></div>
+                </div>
+            </svg>
+        </div>
+        <button class="btn" onclick="cutCake()">Cut the Cake 🎂</button>
+    </section>
+
+    <section id="card-section">
+        <div class="card">
+            <h3>To Someone Special,</h3>
+            <p style="margin-top: 20px;">Happy Birthday, Rehana! ✨ You have such a wonderful way of making everyone around you smile, and today is all about celebrating the amazing person you are. I hope your day is filled with as much laughter, magic, and joy as you bring into the world. May this year be your brightest and most beautiful one yet! 🎂💖✨</p>
+            <p style="margin-top: 20px; font-weight: bold;">Love & Hugs! ❤️</p>
+        </div>
+    </section>
+
+    <section id="ending" style="background: #2b2d42; color: white;">
+        <h1>Have a Magical Year! ✨</h1>
+        <button class="btn" onclick="location.reload()">Replay Magic 🔄</button>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        // --- Countdown Logic ---
+        const countdownArr = ['2', '1', 'GO!'];
+        let count = 0;
+        const countInt = setInterval(() => {
+            if(count < countdownArr.length) {
+                document.getElementById('countdown-text').innerText = countdownArr[count];
+                confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+                count++;
+            } else {
+                clearInterval(countInt);
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => document.getElementById('loader').classList.add('hidden'), 800);
+            }
+        }, 1000);
+
+        // --- Cat Interaction ---
+        function meow() {
+            const cat = document.getElementById('cat-container');
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart-pop';
+            heart.style.left = Math.random() * 50 + 'px';
+            cat.appendChild(heart);
+            setTimeout(() => heart.remove(), 1000);
+            
+            // Interaction bounce
+            cat.style.transform = 'scale(1.3) translateY(-30px)';
+            setTimeout(() => cat.style.transform = 'scale(1) translateY(0)', 300);
+        }
+
+        // --- Cake Cutting ---
+        function cutCake() {
+            const flame = document.getElementById('flame');
+            const cakeBase = document.getElementById('cake-base');
+            
+            if(!flame.classList.contains('hidden')) {
+                flame.classList.add('hidden');
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#ffafcc', '#ff9f1c', '#ffffff']
+                });
+                alert("✨ Make a wish! Cake is cut! ✨");
+            }
+        }
+
+        // --- Scroll Utilities ---
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Background Fireworks on End Section ---
+        window.addEventListener('scroll', () => {
+            const ending = document.getElementById('ending');
+            const position = ending.getBoundingClientRect();
+            if(position.top < window.innerHeight && position.bottom >= 0) {
+                if(Math.random() > 0.95) {
+                    confetti({
+                        particleCount: 10,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 },
+                        colors: ['#a2d2ff', '#ffafcc']
+                    });
+                    confetti({
+                        particleCount: 10,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 },
+                        colors: ['#a2d2ff', '#ffafcc']
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
